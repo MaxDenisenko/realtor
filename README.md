@@ -1,4 +1,4 @@
 # realtor
 
-Client - React
-Server - NodeJS
+#Client - React
+#Server - NodeJS
