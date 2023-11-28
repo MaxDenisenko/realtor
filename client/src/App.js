@@ -1,11 +1,11 @@
+import SignIn from "./components/loginForm";
 
 
 function App() {
-  return (
-    <div className="App">
-      APP
-    </div>
-  );
+  return <>
+  <SignIn/>
+  </>
+  
 }
 
 export default App;
