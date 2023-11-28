@@ -8,23 +8,18 @@ const Zapisi = sequelize.define('zapis',{
         autoIncrement: true,
         primaryKey: true
     },
-    date: {
-        type:DataTypes.DATE
+    phone: {
+        type:DataTypes.STRING,
+        allowNull: false,
+        unique: true
     },
-    area: {
-        type:DataTypes.STRING
+    plus: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
     },
-    sum: {
-        type: DataTypes.INTEGER
-    },
-    fioClient: {
-        type: DataTypes.STRING
-    },
-    phoneClient: {
-        type:DataTypes.STRING
-    },
-    comment: {
-        type: DataTypes.STRING
+    minus: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
     }
 })
 
