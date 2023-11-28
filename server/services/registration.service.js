@@ -10,7 +10,7 @@ class RegistrationService {
     async registration (name, lastname, email, password) {
         const findUser = await usersModels.findOne({where: {email}})
         if(findUser) {
-            throw ApiError.BadRequest(`Email с таким адресов (${email} уже зарегистрирован)`)
+            throw ApiError.BadRequest(`Email с таким адресом (${email} уже зарегистрирован)`)
         }
         const hashPassword = await bcrypt.hash(password, 3)
         const activatedLink = uuid.v4()
