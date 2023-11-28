@@ -32,8 +32,8 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-    const [email, setEmail] = React.useState()
-    const [password, setPassword] = React.useState()
+    const [email, setEmail] = React.useState('')
+    const [password, setPassword] = React.useState('')
     const [userData, setUserData] = React.useState([])
 
   const handleSubmit = async (event) => {
