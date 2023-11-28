@@ -25,7 +25,7 @@ function App() {
   };
 
   return <>
-    {!isLogin ? <SignIn/> : <div>Авторизован</div>}
+    {!isLogin ? <SignIn isLogin={isLogin} setIsLogin={setIsLogin}/> : <div>Авторизован</div>}
   </>
   
 }

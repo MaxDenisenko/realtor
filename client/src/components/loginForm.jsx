@@ -31,7 +31,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
+export default function SignIn({isLogin, setIsLogin}) {
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [userData, setUserData] = React.useState([])
@@ -42,6 +42,7 @@ export default function SignIn() {
         const response = await LoginService.login(email, password)
         localStorage.setItem('token', response.data.accessToken)
         setUserData(response.data)
+        setIsLogin(true)
     } catch (error) {
         console.log(error)
     }
