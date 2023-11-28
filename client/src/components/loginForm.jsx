@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LoginService from '../services/loginService';
 
 function Copyright(props) {
   return (
@@ -31,13 +32,19 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+    const [email, setEmail] = React.useState()
+    const [password, setPassword] = React.useState()
+    const [userData, setUserData] = React.useState([])
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    try {
+        const response = await LoginService.login(email, password)
+        localStorage.setItem('token', response.data.accessToken)
+        setUserData(response.data)
+    } catch (error) {
+        console.log(error)
+    }
   };
 
   return (
@@ -67,6 +74,8 @@ export default function SignIn() {
               label="Электронная почта"
               name="email"
               autoComplete="email"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               autoFocus
             />
             <TextField
@@ -78,6 +87,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={(e)=>setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
