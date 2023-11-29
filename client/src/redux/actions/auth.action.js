@@ -41,6 +41,7 @@ export const AuthCheckAction = () => {
     return async (dispatch) => {
         try {
             const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true})
+            console.log(response)
             localStorage.setItem('tokenR', response.data.accessToken)
             dispatch({type: AUTH_DATA_USER, payload: response.data})
         } catch (error) {
