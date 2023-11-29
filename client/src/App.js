@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import SignIn from "./components/loginForm";
 import {useDispatch, useSelector} from 'react-redux'
-import {AuthCheckAction, AuthLogoutAction} from './redux/actions/auth.action'
+import {AuthCheckAction} from './redux/actions/auth.action'
+import ListPhone from "./components/listPhone";
 
 function App() {
 const dispatch = useDispatch()
@@ -16,7 +17,7 @@ const isLogin = useSelector(state => state.auth.isLogin)
 
 
   return <>
-    {isLogin ? <button onClick={()=>dispatch(AuthLogoutAction())}>Выйти</button> : <SignIn/>}
+    {isLogin ? <ListPhone/> : <SignIn/>}
   </>
   
 }
