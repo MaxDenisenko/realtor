@@ -1,5 +1,5 @@
 import axios from 'axios'
-const API_URL = 'https://maxdenisenko.ru/api'
+export const API_URL = 'https://maxdenisenko.ru/api'
 
 const api = axios.create({
     withCredentials: true,

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,7 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import LoginService from '../services/loginService';
+import { useDispatch } from 'react-redux';
+import { AuthLoginAction } from '../redux/actions/auth.action';
 
 function Copyright(props) {
   return (
@@ -31,21 +32,16 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignIn({isLogin, setIsLogin}) {
+export default function SignIn() {
+  const dispatch = useDispatch()
+
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
-    const [userData, setUserData] = React.useState([])
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-        const response = await LoginService.login(email, password)
-        localStorage.setItem('token', response.data.accessToken)
-        setUserData(response.data)
-        setIsLogin(true)
-    } catch (error) {
-        console.log(error)
-    }
+    dispatch(AuthLoginAction(email, password))
   };
 
   return (

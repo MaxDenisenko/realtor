@@ -1,33 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import SignIn from "./components/loginForm";
-import axios from "axios";
-
+import {useDispatch, useSelector} from 'react-redux'
+import {AuthCheckAction, AuthLogoutAction} from './redux/actions/auth.action'
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false)
-  const [userData, setUserData] = useState([])
+const dispatch = useDispatch()
+const isLogin = useSelector(state => state.auth.isLogin)
 
   useEffect(()=> {
     if (localStorage.getItem('token')) {
-      CheckAuth()
+      dispatch(AuthCheckAction())
   }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
-  const CheckAuth =  () => {
-    return async (userData) => {
-    try {
-      const response = await axios.get('https://maxdenisenko.ru/api/refresh', { withCredentials: true})
-      localStorage.setItem('token', response.data.accessToken)
-      setUserData(response.data)
-      setIsLogin(true)
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  };
 
   return <>
-    {!isLogin ? <SignIn isLogin={isLogin} setIsLogin={setIsLogin}/> : <div>Авторизован</div>}
+    {isLogin ? <button onClick={()=>dispatch(AuthLogoutAction())}>Выйти</button> : <SignIn/>}
   </>
   
 }
