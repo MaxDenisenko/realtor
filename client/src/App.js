@@ -15,6 +15,9 @@ const isLogin = useSelector(state => state.auth.isLogin)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
+  if(!isLogin) {
+    return <div>Загрузка...</div>
+  }
 
   return <>
     {isLogin ? <ListPhone/> : <SignIn/>}
