@@ -8,7 +8,7 @@ const dispatch = useDispatch()
 const isLogin = useSelector(state => state.auth.isLogin)
 
   useEffect(()=> {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('tokenR')) {
       dispatch(AuthCheckAction())
   }
     // eslint-disable-next-line react-hooks/exhaustive-deps

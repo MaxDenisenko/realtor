@@ -35,12 +35,11 @@ const defaultTheme = createTheme();
 export default function SignIn() {
   const dispatch = useDispatch()
 
-    const [email, setEmail] = React.useState('')
-    const [password, setPassword] = React.useState('')
-
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    let email = data.get('email')
+    let password = data.get('password')
     dispatch(AuthLoginAction(email, password))
   };
 
@@ -71,8 +70,6 @@ export default function SignIn() {
               label="Электронная почта"
               name="email"
               autoComplete="email"
-              value={email}
-              onChange={(e)=>setEmail(e.target.value)}
               autoFocus
             />
             <TextField
@@ -84,8 +81,6 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-              value={password}
-              onChange={(e)=>setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

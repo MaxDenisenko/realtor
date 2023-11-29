@@ -8,7 +8,7 @@ const api = axios.create({
 
 
 api.interceptors.request.use((config) => {
-    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+    config.headers.Authorization = `Bearer ${localStorage.getItem('tokenR')}`
     return config
 })
 
@@ -20,7 +20,7 @@ api.interceptors.response.use((config) => {
         originalRequest._isRetry = true
         try {
             const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true})
-            localStorage.setItem('token', response.data.accessToken)
+            localStorage.setItem('tokenR', response.data.accessToken)
             return api.request(originalRequest)
         } catch (error) {
             console.log('не авторизован');
