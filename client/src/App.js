@@ -13,15 +13,17 @@ function App() {
   }
   },[])
 
-  const CheckAuth = async () => {
+  const CheckAuth =  () => {
+    return async (userData) => {
     try {
-      const response = await axios.get(`https://maxdenisenko.ru/api/refresh`, { withCredentials: true})
+      const response = await axios.get('https://maxdenisenko.ru/api/refresh', { withCredentials: true})
       localStorage.setItem('token', response.data.accessToken)
       setUserData(response.data)
       setIsLogin(true)
     } catch (error) {
       console.log(error);
     }
+  }
   };
 
   return <>
