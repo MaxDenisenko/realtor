@@ -7,7 +7,7 @@ import ListPhone from "./components/listPhone";
 function App() {
 const dispatch = useDispatch()
 const isLogin = useSelector(state => state.auth.isLogin)
-
+const isLoading = useSelector(state => state.auth.isLoding)
   useEffect(()=> {
     if (localStorage.getItem('tokenR')) {
       dispatch(AuthCheckAction())
@@ -15,6 +15,7 @@ const isLogin = useSelector(state => state.auth.isLogin)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
+  if (isLoading) {return <div style={{textAlign:"center"}}>Загрузка...</div>}
   return <>
     {isLogin ? <ListPhone/> : <SignIn/>}
   </>

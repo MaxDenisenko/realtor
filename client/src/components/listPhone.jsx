@@ -8,7 +8,6 @@ import { DataGrid } from '@mui/x-data-grid';
 const ListPhone = () => {
     const dispatch = useDispatch()
     const zapis = useSelector(state => state.zapis.zapis)
-    const isLogin = useSelector(state => state.auth.isLogin)
     useEffect(()=> {
         dispatch(GetZapis())
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -21,9 +20,6 @@ const ListPhone = () => {
         {field: 'minus',type: 'number', headerName: 'Отрицательных', width: 180},
 ]
 
-    if(!isLogin) {
-        return <div>Загрузка...</div>
-    }
     return <>
     <div>
         <button onClick={()=>dispatch(AuthLogoutAction())}>Выйти</button>

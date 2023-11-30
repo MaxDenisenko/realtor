@@ -1,6 +1,6 @@
 import axios from "axios";
 import AuthService from "../../service/auth.service";
-import { AUTH_DATA_USER } from "../const";
+import { AUTH_DATA_USER, LOADING } from "../const";
 import { API_URL } from "../../api/index";
 
 
@@ -39,6 +39,7 @@ export const AuthLogoutAction = () => {
 }
 export const AuthCheckAction = () => {
     return async (dispatch) => {
+        dispatch({type: LOADING})
         try {
             const response = await axios.get(`${API_URL}/refresh`, { withCredentials: true})
             localStorage.setItem('tokenR', response.data.accessToken)
@@ -46,5 +47,6 @@ export const AuthCheckAction = () => {
         } catch (error) {
             console.log(error.response?.data?.message);
         }
+        finally { dispatch({type: LOADING})}
     }
 }
