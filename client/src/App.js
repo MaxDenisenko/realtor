@@ -16,8 +16,9 @@ const isLoading = useSelector(state => state.auth.isLoding)
   },[])
 
   if (isLoading) {return <div style={{textAlign:"center"}}>Загрузка...</div>}
+  if (!isLogin) { return <SignIn/>}
   return <>
-    {isLogin ? <ListPhone/> : <SignIn/>}
+      <ListPhone/>
   </>
   
 }
