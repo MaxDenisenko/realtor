@@ -12,3 +12,11 @@ export const GetZapis = ()=> {
         }
     }
 }
+
+export const CreateZapis = async (phone) => {
+        try {
+            await ZapisService.createZapis(phone)
+        } catch (error) {
+            console.log(error.response?.data?.message);
+        }
+    }
