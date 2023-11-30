@@ -7,7 +7,7 @@ import ListPhone from "./components/listPhone";
 function App() {
 const dispatch = useDispatch()
 const isLogin = useSelector(state => state.auth.isLogin)
-const isLoading = useSelector(state => state.auth.isLoding)
+const isLoading = useSelector(state => state.auth.isLoading)
   useEffect(()=> {
     if (localStorage.getItem('tokenR')) {
       dispatch(AuthCheckAction())
