@@ -13,9 +13,9 @@ export const GetZapis = ()=> {
     }
 }
 
-export const CreateZapis = async (phone) => {
+export const CreateZapis = (phone) => {
         try {
-            await ZapisService.createZapis(phone)
+            ZapisService.createZapis(phone)
         } catch (error) {
             console.log(error.response?.data?.message);
         }
