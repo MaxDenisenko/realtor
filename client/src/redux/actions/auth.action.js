@@ -31,7 +31,7 @@ export const AuthLogoutAction = () => {
         try {
             await AuthService.logout()
             localStorage.removeItem('tokenR')
-            dispatch({type: AUTH_LOGOUT, payload: {}})
+            dispatch({type: AUTH_LOGOUT})
         } catch (error) {
             console.log(error.response?.data?.message);
         }
