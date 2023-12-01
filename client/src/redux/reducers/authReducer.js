@@ -10,7 +10,7 @@ const authReducers = (state = initialState, action) => {
         case AUTH_DATA_USER: 
             return {...state, ...action.payload, isLogin: !state.isLogin}
         case AUTH_LOGOUT:
-            return {...state, auth:{}, isLogin: false, isLoading: false, zapis:{}, }
+            return {state:initialState}
         case LOADING:
             return {...state, isLoading: !state.isLoading}
         default:
