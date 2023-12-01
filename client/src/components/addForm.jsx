@@ -21,7 +21,7 @@ const AddForm = ({modalOpen, setModalOpen}) => {
     setModalOpen(false);
   };
     const handleAdd = () => {
-        CreateZapis(phone)
+        dispatch(CreateZapis(phone))
         handleClose()
         dispatch(GetZapis())
     }
@@ -35,8 +35,9 @@ const AddForm = ({modalOpen, setModalOpen}) => {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle>{"Добавить телефон"}</DialogTitle>
+          <div></div>
         <DialogContent>
-            <TextField id="outlined-basic" label="Телефон" variant="outlined" value={phone} onChange={(e)=>setPhone(e.target.value)}/>
+            <TextField size="small" id="outlined-basic" label="Телефон" variant="outlined" value={phone} onChange={(e)=>setPhone(e.target.value)}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Отмена</Button>

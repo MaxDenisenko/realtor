@@ -40,10 +40,10 @@ const ListPhone = () => {
             columns={columns}
             initialState={{
                 pagination: {
-                  paginationModel: { page: 0, pageSize: 9 },
+                  paginationModel: { page: 0, pageSize: 39 },
                 },
               }}
-              pageSizeOptions={[9, 10]}
+              pageSizeOptions={[39, 40]}
               checkboxSelection
             />}
     </div>
