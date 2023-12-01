@@ -1,6 +1,6 @@
 import axios from "axios";
 import AuthService from "../../service/auth.service";
-import { AUTH_DATA_USER, LOADING } from "../const";
+import { AUTH_DATA_USER, AUTH_LOGOUT, LOADING } from "../const";
 import { API_URL } from "../../api/index";
 
 
@@ -31,7 +31,7 @@ export const AuthLogoutAction = () => {
         try {
             await AuthService.logout()
             localStorage.removeItem('tokenR')
-            dispatch({type: AUTH_DATA_USER, payload: {}})
+            dispatch({type: AUTH_LOGOUT, payload: {}})
         } catch (error) {
             console.log(error.response?.data?.message);
         }

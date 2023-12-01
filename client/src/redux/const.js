@@ -1,4 +1,5 @@
 export const AUTH_DATA_USER = 'AUTH_DATA_USER'
+export const AUTH_LOGOUT = 'AUTH_LOGOUT'
 export const DATA_USER = 'DATA_USER'
 export const DATA_ZAPIS = 'DATA_ZAPIS'
 export const ADD_ZAPIS = 'ADD_ZAPIS'
