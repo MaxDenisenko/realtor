@@ -123,7 +123,7 @@ function Row (props) {
             <TableCell style={{padding:0}}>
               <IconButton
                 size="small"
-                onClick={getCommentsAndOpen(row.phone)}
+                onClick={()=>getCommentsAndOpen(row.phone)}
                 >
                 {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
               </IconButton>
