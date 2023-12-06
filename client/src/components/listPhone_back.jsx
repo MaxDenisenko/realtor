@@ -39,14 +39,15 @@ const ListPhone = () => {
 ]
 
     return <>
-    <div style={{margin:"10px", display: "flex", justifyContent: "space-between"}}>
+    <Box sx={{margin:"10px", width: "500px"}}>
+    <div style={{ display: "flex", justifyContent: "space-between"}}>
         <Button variant="outlined" onClick={handleClickOpen}>
             Добавить телефон
         </Button>
         <AddForm modalOpen={modalOpen} setModalOpen={setModalOpen}/>
         <Button variant="contained" onClick={()=>dispatch(AuthLogoutAction())}>Выйти</Button>
     </div>
-    <div style={{height: "100%", margin:"10px"}}>
+    <div style={{height: "100%"}}>
         {zapis && <DataGrid
             rows={zapis}
             columns={columns}
@@ -60,7 +61,7 @@ const ListPhone = () => {
             slots={{ toolbar: QuickSearchToolbar }}
             />}
     </div>
-    
+    </Box>
     </>
 }
 

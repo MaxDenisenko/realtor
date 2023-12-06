@@ -13,41 +13,42 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import AddCommentIcon from '@mui/icons-material/AddComment';
 
 const message = [
   {
     id:1,
     date:'01.11.2023',
     realtorFIO:'Иванов Иван Иванович',
-    plusminus:'-',
+    plusminus:'Отрицательный',
     message:'Иван совсем не брежно относится к квартире'
   },
   {
     id:2,
     date:'01.11.2023',
     realtorFIO:'Иванов Иван Иванович',
-    plusminus:'-',
+    plusminus:'Отрицательный',
     message:'Иван совсем не брежно относится к квартире'
   },
   {
     id:3,
     date:'01.11.2023',
     realtorFIO:'Иванов Иван Иванович',
-    plusminus:'+',
+    plusminus:'Положительный',
     message:'Иван совсем не брежно относится к квартире'
   },
   {
     id:4,
     date:'01.11.2023',
     realtorFIO:'Иванов Иван Иванович',
-    plusminus:'+',
+    plusminus:'Положительный',
     message:'Иван совсем не брежно относится к квартире'
   },
   {
     id:5,
     date:'01.11.2023',
     realtorFIO:'Иванов Иван Иванович',
-    plusminus:'-',
+    plusminus:'Отрицательный',
     message:'Иван совсем не брежно относится к квартире'
   },
 ]
@@ -65,34 +66,35 @@ const ListPhone = () => {
       };
 
     return <>
-    <div style={{margin:"10px", display: "flex", justifyContent: "space-between"}}>
-        <Button variant="outlined" onClick={handleClickOpen}>
-            Добавить телефон
-        </Button>
-        <AddForm modalOpen={modalOpen} setModalOpen={setModalOpen}/>
-        <Button variant="contained" onClick={()=>dispatch(AuthLogoutAction())}>Выйти</Button>
-    </div>
-    <div style={{height: "100%", margin:"10px"}}>
-      <TableContainer component={Paper}>
-        <Table sx={{maxWidth: 650}}>
-          <TableHead>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell>ID</TableCell>
-              <TableCell>Телефон</TableCell>
-              <TableCell>+</TableCell>
-              <TableCell>-</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {zapis && zapis.map((item) => (
-              <Row key={item.id} row={item}/>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
-    
+    <Box sx={{margin: "10px auto", width:"100%", maxWidth:650}}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", marginBottom:"5px"}}>
+            <Button variant="outlined" onClick={handleClickOpen}>
+                Добавить телефон
+            </Button>
+            <AddForm modalOpen={modalOpen} setModalOpen={setModalOpen}/>
+            <Button variant="contained" onClick={()=>dispatch(AuthLogoutAction())}>Выйти</Button>
+        </Box>
+        <Box sx={{height: "100%"}}>
+          <TableContainer component={Paper}>
+            <Table sx={{maxWidth: "100%", minWidth:350}}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>ID</TableCell>
+                  <TableCell></TableCell>
+                  <TableCell>Телефон</TableCell>
+                  <TableCell>+</TableCell>
+                  <TableCell>-</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {zapis && zapis.map((item) => (
+                  <Row key={item.id} row={item}/>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+      </Box>
     </>
 }
 
@@ -103,44 +105,43 @@ function Row (props) {
   return (
     <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-          <TableCell>
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => setOpen(!open)}
-              >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            <TableCell>{row.id}</TableCell>
+            <TableCell style={{padding:0}}>
+              <IconButton
+                size="small"
+                onClick={() => setOpen(!open)}
+                >
+                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
               </IconButton>
             </TableCell>
-            <TableCell>{row.id}</TableCell>
-            <TableCell>{row.phone}</TableCell>
+            <TableCell>{row.phone} <IconButton size="small" onClick={()=>setOpen(!open)}><AddCommentIcon /></IconButton></TableCell>
             <TableCell>{row.plus}</TableCell>
             <TableCell>{row.minus}</TableCell>
         </TableRow>
         <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
           <Collapse in={open} timeout='auto' unmountOnExit>
-            <Box sx={{ margin: 1 }}>
+            <Box sx={{ margin: 0}}>
               <Typography variant="h6" gutterBottom component="div">
                 Отзывы
               </Typography>
-              <Table size="small">
+              <Table size="small" sx={{maxWidth:"100%"}}>
                 <TableHead>
-                  <TableRow>
-                    <TableCell>Дата</TableCell>
-                    <TableCell>Риелтор</TableCell>
-                    <TableCell>+/-</TableCell>
-                    <TableCell>Отзыв</TableCell>
-                  </TableRow>
+
                 </TableHead>
                 <TableBody>
-                  {message && message.map((item) => (
-                    <TableRow>
+                  {message && message.map((item) => (<Box sx={{border: 1}}>
+                    <TableRow key={item.id}>
                       <TableCell>{item.date}</TableCell>
                       <TableCell>{item.realtorFIO}</TableCell>
-                      <TableCell>{item.plusminus}</TableCell>
-                      <TableCell>{item.message}</TableCell>
                     </TableRow>
+                    <TableRow>
+                      <TableCell colSpan="2">{item.plusminus}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell colSpan="2">{item.message}</TableCell>
+                    </TableRow>
+                    </Box>
                   ))}
                 </TableBody>
               </Table>
