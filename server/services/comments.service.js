@@ -3,6 +3,7 @@ const commentsModule = require('../models/comments.module')
 
 class CommentsService {
     async getComments(phone) {
+        console.log(phone)
         const commentsData = await commentsModule.findAll({where: {phone}})
         return commentsData
     }
