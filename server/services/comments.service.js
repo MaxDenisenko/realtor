@@ -2,8 +2,8 @@ const ApiError = require('../exceptions/apiError')
 const commentsModule = require('../models/comments.module')
 
 class CommentsService {
-    async getComments() {
-        const commentsData = await commentsModule.findAll()
+    async getComments(phone) {
+        const commentsData = await commentsModule.findAll({where: {phone}})
         return commentsData
     }
     async createComment(date, phone, realtorFIO, plusminus, message ) {

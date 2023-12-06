@@ -24,7 +24,6 @@ const AddCommentForm = ({ modalCommentsOpen, setModalCommentsOpen, phone, realto
   const handleAdd = () => {
     const date = new Date()
     const dateNew = date.toISOString()
-    // console.log(dateNew, phone, realtorFIO, plusminus, message)
     dispatch(CreateComment(dateNew, phone, realtorFIO, plusminus, message))
     handleClose()
     dispatch(GetComments())

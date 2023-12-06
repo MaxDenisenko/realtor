@@ -15,44 +15,45 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import AddCommentForm from "./addCommentForm";
+import { GetComments } from "../redux/actions/comments.action";
 
-const message = [
-  {
-    id:1,
-    date:'01.11.2023',
-    realtorFIO:'Иванов Иван Иванович',
-    plusminus:'Отрицательный',
-    message:'Иван совсем не брежно относится к квартире'
-  },
-  {
-    id:2,
-    date:'01.11.2023',
-    realtorFIO:'Иванов Иван Иванович',
-    plusminus:'Отрицательный',
-    message:'Иван совсем не брежно относится к квартире'
-  },
-  {
-    id:3,
-    date:'01.11.2023',
-    realtorFIO:'Иванов Иван Иванович',
-    plusminus:'Положительный',
-    message:'Иван совсем не брежно относится к квартире'
-  },
-  {
-    id:4,
-    date:'01.11.2023',
-    realtorFIO:'Иванов Иван Иванович',
-    plusminus:'Положительный',
-    message:'Иван совсем не брежно относится к квартире'
-  },
-  {
-    id:5,
-    date:'01.11.2023',
-    realtorFIO:'Иванов Иван Иванович',
-    plusminus:'Отрицательный',
-    message:'Иван совсем не брежно относится к квартире'
-  },
-]
+// const message = [
+//   {
+//     id:1,
+//     date:'01.11.2023',
+//     realtorFIO:'Иванов Иван Иванович',
+//     plusminus:'Отрицательный',
+//     message:'Иван совсем не брежно относится к квартире'
+//   },
+//   {
+//     id:2,
+//     date:'01.11.2023',
+//     realtorFIO:'Иванов Иван Иванович',
+//     plusminus:'Отрицательный',
+//     message:'Иван совсем не брежно относится к квартире'
+//   },
+//   {
+//     id:3,
+//     date:'01.11.2023',
+//     realtorFIO:'Иванов Иван Иванович',
+//     plusminus:'Положительный',
+//     message:'Иван совсем не брежно относится к квартире'
+//   },
+//   {
+//     id:4,
+//     date:'01.11.2023',
+//     realtorFIO:'Иванов Иван Иванович',
+//     plusminus:'Положительный',
+//     message:'Иван совсем не брежно относится к квартире'
+//   },
+//   {
+//     id:5,
+//     date:'01.11.2023',
+//     realtorFIO:'Иванов Иван Иванович',
+//     plusminus:'Отрицательный',
+//     message:'Иван совсем не брежно относится к квартире'
+//   },
+// ]
 
 const ListPhone = () => {
     const dispatch = useDispatch()
@@ -104,6 +105,17 @@ function Row (props) {
   const [open, setOpen] = useState(false)
   const [openModalAddComment, setOpenModalAddComment] = useState(false)
   const realtorFIO = useSelector(state => state.auth.user.email)
+  const dispatch = useDispatch()
+  const message = useSelector(state => state.zapis.message)
+
+  const getCommentsAndOpen = (phone) => {
+    if(open) {
+      setOpen(!open)
+    }
+    setOpen(!open)
+    dispatch(GetComments(phone))
+  }
+
   return (
     <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -111,7 +123,7 @@ function Row (props) {
             <TableCell style={{padding:0}}>
               <IconButton
                 size="small"
-                onClick={() => setOpen(!open)}
+                onClick={getCommentsAndOpen(row.phone)}
                 >
                 {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
               </IconButton>

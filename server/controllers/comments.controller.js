@@ -3,7 +3,8 @@ const commentsService = require('../services/comments.service')
 class CommentsControllers {
     async getComments (req, res, next) {
         try {
-            const response = await commentsService.getComments()
+            const { phone } = req.body
+            const response = await commentsService.getComments(phone)
             return res.json(response)    
         } catch (error) {
             next(error)

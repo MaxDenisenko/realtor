@@ -1,4 +1,4 @@
-import { DATA_ZAPIS, AUTH_LOGOUT } from "../const"
+import { DATA_ZAPIS, AUTH_LOGOUT, DATA_COMMENTS } from "../const"
 const initialState = []
 
 const zapisReducers = (state=initialState, action) => {
@@ -7,6 +7,8 @@ const zapisReducers = (state=initialState, action) => {
             return {...state, zapis: [...action.payload]}
         case AUTH_LOGOUT:
             return initialState
+        case DATA_COMMENTS:
+            return {...state, message: [...action.payload]}
         default:
             return state
     }
