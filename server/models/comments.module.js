@@ -14,7 +14,6 @@ const Comments = sequelize.define('comments',{
     phone: {
         type:DataTypes.STRING,
         allowNull: false,
-        unique: true
     },
     realtorFIO: {
         type:DataTypes.STRING,
