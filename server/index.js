@@ -5,6 +5,7 @@ const LoginRoutes = require('./routes/login.routes')
 const LogoutRoutes = require('./routes/logout.routes')
 const UsersRoutes = require('./routes/users.routes')
 const zapisiRouter = require('./routes/zapisi.routes')
+const CommentsRouter = require('./routes/comments.routes')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const errorMiddleware = require('./middleware/error.midleware')
@@ -19,7 +20,7 @@ app.use(cors({
   credentials: true,
   origin: process.env.CLIENT_DEV_URL || process.env.CLIENT_PROD_URL
 }))
-app.use('/api',RegistrationRoutes, LoginRoutes, LogoutRoutes, UsersRoutes, zapisiRouter)
+app.use('/api',RegistrationRoutes, LoginRoutes, LogoutRoutes, UsersRoutes, zapisiRouter, CommentsRouter)
 app.use(errorMiddleware)
 
 app.listen(PORT, () => {

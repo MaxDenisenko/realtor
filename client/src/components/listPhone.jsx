@@ -14,6 +14,7 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import AddCommentIcon from '@mui/icons-material/AddComment';
+import AddCommentForm from "./addCommentForm";
 
 const message = [
   {
@@ -101,7 +102,8 @@ const ListPhone = () => {
 function Row (props) {
   const {row} = props
   const [open, setOpen] = useState(false)
-
+  const [openModalAddComment, setOpenModalAddComment] = useState(false)
+  const realtorFIO = useSelector(state => state.auth.user.email)
   return (
     <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -114,7 +116,10 @@ function Row (props) {
                 {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
               </IconButton>
             </TableCell>
-            <TableCell>{row.phone} <IconButton size="small" onClick={()=>setOpen(!open)}><AddCommentIcon /></IconButton></TableCell>
+            <TableCell>{row.phone} <IconButton size="small" onClick={()=>setOpenModalAddComment(true)}>
+              <AddCommentIcon /></IconButton>
+              <AddCommentForm modalCommentsOpen={openModalAddComment} setModalCommentsOpen={setOpenModalAddComment} phone={row.phone} realtorFIO={realtorFIO}/>
+            </TableCell>
             <TableCell>{row.plus}</TableCell>
             <TableCell>{row.minus}</TableCell>
         </TableRow>
@@ -141,6 +146,7 @@ function Row (props) {
                     <TableRow>
                       <TableCell colSpan="2">{item.message}</TableCell>
                     </TableRow>
+
                     </Box>
                   ))}
                 </TableBody>

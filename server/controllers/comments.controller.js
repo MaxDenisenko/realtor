@@ -12,8 +12,8 @@ class CommentsControllers {
     }
     async createComment (req, res, next) {
         try {
-            const { date, name,lastname, plusminus, message } = req.body
-            const response = await commentsService.createComment(date, name,lastname, plusminus, message)
+            const { date, phone, realtorFIO, plusminus, message } = req.body
+            const response = await commentsService.createComment(date, phone, realtorFIO, plusminus, message)
             return res.json(response)    
         } catch (error) {
             next(error)
