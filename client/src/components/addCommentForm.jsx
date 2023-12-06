@@ -22,8 +22,10 @@ const AddCommentForm = ({ modalCommentsOpen, setModalCommentsOpen, phone, realto
     setModalCommentsOpen(false);
   };
   const handleAdd = () => {
-    const date = Date.now()
-    dispatch(CreateComment(date, phone, realtorFIO, plusminus, message))
+    const date = new Date()
+    const dateNew = date.toISOString()
+    // console.log(dateNew, phone, realtorFIO, plusminus, message)
+    dispatch(CreateComment(dateNew, phone, realtorFIO, plusminus, message))
     handleClose()
     dispatch(GetComments())
   }
