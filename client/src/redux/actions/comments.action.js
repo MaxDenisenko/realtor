@@ -16,6 +16,7 @@ export const GetComments = ()=> {
 export const CreateComment = (date, phone, realtorFIO, plusminus, message) => {
     return async dispatch => {
         try {
+console.log(date, phone, realtorFIO, plusminus, message)
             await CommentsService.createComments(date, phone, realtorFIO, plusminus, message)
         } catch (error) {
             console.log(error.response?.data?.message);

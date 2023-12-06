@@ -21,10 +21,10 @@ const Comments = sequelize.define('comments',{
         allowNull: false
     },
     plusminus: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
     },
     message: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
     }
 })
 
