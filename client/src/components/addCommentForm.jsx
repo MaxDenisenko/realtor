@@ -26,7 +26,7 @@ const AddCommentForm = ({ modalCommentsOpen, setModalCommentsOpen, phone, realto
     const dateNew = date.toISOString()
     dispatch(CreateComment(dateNew, phone, realtorFIO, plusminus, message))
     handleClose()
-    // dispatch(GetComments())
+    dispatch(GetComments(phone))
   }
   const handleChangeRadio = (e) => {
     setplusminus(e.target.value);
