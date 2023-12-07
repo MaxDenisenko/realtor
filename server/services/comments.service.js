@@ -18,6 +18,7 @@ class CommentsService {
         if (plusminus === 'Отрицательный') {
             await findPhone.increment('minus')
         }
+        if ((plusminus === 'Положительный'))
         await findPhone.increment('plus')
             
         return createComment
