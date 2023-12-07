@@ -13,10 +13,12 @@ class CommentsService {
             throw ApiError.BadRequest(`Комментарий на номер (${phone}) Вами уже оставлен`)
         }
         const createComment = await commentsModule.create({date, phone, realtorFIO, plusminus, message})
+
+        const findPhone = await zapisModule.findOne({where: {phone}})
         if (plusminus === 'Отрицательный') {
-            await zapisModule.update({minus: zapisModule.literal('minus + 1')},{where: phone})
+            await findPhone.increment('minus')
         }
-        await zapisModule.update({plus: zapisModule.literal('plus + 1')},{where: phone})
+        await findPhone.increment('plus')
             
         return createComment
     }
