@@ -106,7 +106,7 @@ function Row (props) {
   const [openModalAddComment, setOpenModalAddComment] = useState(false)
   const realtorFIO = useSelector(state => state.auth.user.email)
   const dispatch = useDispatch()
-  const message = useSelector(state => state.zapis.message)
+
 
   const getCommentsAndOpen = (phone) => {
     if(open) {
@@ -147,7 +147,8 @@ function Row (props) {
 
                 </TableHead>
                 <TableBody>
-                  {message && message.map((item) => (<Box sx={{border: 1}}>
+                  {row.message 
+                  ? row.message.map((item) => (<Box sx={{border: 1}}>
                     <TableRow key={item.id}>
                       <TableCell>{item.date}</TableCell>
                       <TableCell>{item.realtorFIO}</TableCell>
@@ -160,7 +161,9 @@ function Row (props) {
                     </TableRow>
 
                     </Box>
-                  ))}
+                  ))
+                : <TableCell>Еще не оставили ни одного комментария</TableCell>
+                }
                 </TableBody>
               </Table>
             </Box>

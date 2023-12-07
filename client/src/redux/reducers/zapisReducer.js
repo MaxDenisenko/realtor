@@ -8,7 +8,12 @@ const zapisReducers = (state=initialState, action) => {
         case AUTH_LOGOUT:
             return initialState
         case DATA_COMMENTS:
-            return {...state, message: [...action.payload]}
+            return {...state, zapis: state.zapis.map((zapis) => {
+                if(zapis.phone === action.payload[0].phone) {
+                    return {...zapis, message:[...action.payload]}
+                }
+                return zapis
+            })}
         default:
             return state
     }
