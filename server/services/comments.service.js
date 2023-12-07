@@ -1,5 +1,6 @@
 const ApiError = require('../exceptions/apiError')
 const commentsModule = require('../models/comments.module')
+const zapisModule = require('../models/zapisi.module')
 
 class CommentsService {
     async getComments(phone) {
@@ -12,6 +13,11 @@ class CommentsService {
             throw ApiError.BadRequest(`Комментарий на номер (${phone}) Вами уже оставлен`)
         }
         const createComment = await commentsModule.create({date, phone, realtorFIO, plusminus, message})
+        if (plusminus === 'Отрицательный') {
+            await zapisModule.update({minus: minus++},{where: phone})
+        }
+        await zapisModule.update({plus: plus++},{where: phone})
+            
         return createComment
     }
 }
