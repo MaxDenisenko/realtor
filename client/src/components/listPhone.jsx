@@ -143,9 +143,6 @@ function Row (props) {
                 Отзывы
               </Typography>
               <Table size="small" sx={{maxWidth:"100%"}}>
-                <TableHead>
-
-                </TableHead>
                 <TableBody>
                   {row.message 
                   ? row.message.map((item) => (<Box sx={{border: 1}}>
@@ -162,7 +159,7 @@ function Row (props) {
 
                     </Box>
                   ))
-                : <TableCell>Еще не оставили ни одного комментария</TableCell>
+                : <TableCell><Typography variant="h8" gutterBottom component="div">Еще не оставили ни одного комментария</Typography></TableCell>
                 }
                 </TableBody>
               </Table>
