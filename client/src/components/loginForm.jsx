@@ -55,8 +55,8 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'black' }}>
-            <NightShelterOutlinedIcon />
+          <Avatar sx={{ m: 1, bgcolor: 'black'}}>
+            <NightShelterOutlinedIcon/>
           </Avatar>
           <Typography component="h3" variant="h3">
             Realtor App
