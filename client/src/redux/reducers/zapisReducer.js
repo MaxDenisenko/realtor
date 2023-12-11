@@ -4,7 +4,7 @@ const initialState = []
 const zapisReducers = (state = initialState, action) => {
     switch (action.type) {
         case DATA_ZAPIS:
-            return { ...state, zapis: [...action.payload] }
+            return { ...state, zapis: [...action.payload], searchPhone:[] }
         case AUTH_LOGOUT:
             return initialState
         case DATA_COMMENTS:

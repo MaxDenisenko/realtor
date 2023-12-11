@@ -5,6 +5,9 @@ const zapisModule = require('../models/zapisi.module')
 class CommentsService {
     async getComments(phone) {
         const commentsData = await commentsModule.findAll({where: {phone}})
+        if (!commentsData) {
+            throw ApiError.BadRequest('Еще ни кто не оставил комментарии')
+        }
         return commentsData
     }
     async createComment(date, phone, realtorFIO, plusminus, message ) {
