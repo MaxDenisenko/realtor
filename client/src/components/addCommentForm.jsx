@@ -41,7 +41,7 @@ const AddCommentForm = ({ modalCommentsOpen, setModalCommentsOpen, phone, realto
       onClose={handleClose}
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle sx={{ marginBottom: 3 }}>{"Добавить комментарий"}</DialogTitle>
+      <DialogTitle sx={{ marginBottom: 3 }}>{`Добавить комментарий для ${phone}`}</DialogTitle>
       <DialogContent>
         <FormControl>
           <FormLabel id="demo-controlled-radio-buttons-group"></FormLabel>

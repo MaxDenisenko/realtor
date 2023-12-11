@@ -34,9 +34,9 @@ const AddForm = ({modalOpen, setModalOpen}) => {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle sx={{marginBottom: 3 }}>{"Добавить телефон"}</DialogTitle>
+        <DialogTitle >{"Добавить телефон"}</DialogTitle>
         <DialogContent>
-            <TextField size="small" id="outlined-basic" label="Телефон" variant="outlined" value={phone} onChange={(e)=>setPhone(e.target.value)}/>
+            <TextField sx={{marginTop:2}} size="small" id="outlined-basic" label="Телефон" variant="outlined" value={phone} onChange={(e)=>setPhone(e.target.value)}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Отмена</Button>
