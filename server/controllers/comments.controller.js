@@ -4,7 +4,6 @@ class CommentsControllers {
     async getComments (req, res, next) {
         try {
             const { phone } = req.body
-            console.log(phone)
             const response = await commentsService.getComments(phone)
             return res.json(response)    
         } catch (error) {
