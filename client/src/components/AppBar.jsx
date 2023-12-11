@@ -11,7 +11,7 @@ import AddForm from "./addForm";
 import { AuthLogoutAction } from '../redux/actions/auth.action'
 
 export default function MainAppBar() {
-    const dispatch = useDispatch
+    const dispatch = useDispatch()
     const [modalOpen, setModalOpen] = useState(false);
     const handleClickOpen = () => {
         setModalOpen(true);
