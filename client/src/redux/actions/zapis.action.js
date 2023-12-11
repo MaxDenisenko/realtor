@@ -8,7 +8,7 @@ export const GetZapis = ()=> {
             const response = await ZapisService.getZapis()
             dispatch({type: DATA_ZAPIS, payload: response.data})
         } catch (error) {
-            console.log(error.response?.data?.message);
+            // console.log(error.response?.data?.message);
             dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
             setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }
@@ -20,7 +20,7 @@ export const CreateZapis = (phone) => {
         try {
             await ZapisService.createZapis(phone)
         } catch (error) {
-            console.log(error.response?.data?.message);
+            // console.log(error.response?.data?.message);
             dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
             setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }

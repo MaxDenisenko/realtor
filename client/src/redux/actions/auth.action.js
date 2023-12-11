@@ -11,7 +11,7 @@ export const AuthLoginAction = (email, password)=> {
             localStorage.setItem('tokenR', response.data.accessToken)
             dispatch({type: AUTH_DATA_USER, payload: response.data})
         } catch (error) {
-            console.log(error.response?.data?.message);
+            // console.log(error.response?.data?.message);
             dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
             setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }
@@ -24,7 +24,7 @@ export const AuthRegistrationAction = (email, password, name, lastname)=> {
             localStorage.setItem('tokenR', response.data.accessToken)
             dispatch({type: AUTH_DATA_USER, payload: response.data})
         } catch (error) {
-            console.log(error.response?.data?.message);
+            // console.log(error.response?.data?.message);
             dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
             setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }
@@ -49,7 +49,7 @@ export const AuthCheckAction = () => {
             localStorage.setItem('tokenR', response.data.accessToken)
             dispatch({type: AUTH_DATA_USER, payload: response.data})
         } catch (error) {
-            console.log(error.response?.data?.message);
+            // console.log(error.response?.data?.message);
             dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
             setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
 
