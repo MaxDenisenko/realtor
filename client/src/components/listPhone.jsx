@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthLogoutAction } from '../redux/actions/auth.action'
 import { GetZapis } from "../redux/actions/zapis.action";
-import AddForm from "./addForm";
-import { Box, Button, Collapse, IconButton, Typography } from "@mui/material";
+import { Box, Collapse, IconButton, Typography } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -15,6 +13,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import AddCommentForm from "./addCommentForm";
 import { GetComments } from "../redux/actions/comments.action";
+import MainAppBar from "./AppBar";
+
 
 const ListPhone = () => {
   const dispatch = useDispatch()
@@ -23,23 +23,17 @@ const ListPhone = () => {
     dispatch(GetZapis())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleClickOpen = () => {
-    setModalOpen(true);
-  };
+  
 
   return <>
     <Box sx={{ margin: "10px auto", width: "100%", maxWidth: 650 }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
-        <Button variant="outlined" onClick={handleClickOpen}>
-          Добавить телефон
-        </Button>
-        <AddForm modalOpen={modalOpen} setModalOpen={setModalOpen} />
-        <Button variant="contained" onClick={() => dispatch(AuthLogoutAction())}>Выйти</Button>
-      </Box>
+    <MainAppBar />
+      {/* <Box sx={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
+        
+      </Box> */}
       <Box sx={{ height: "100%" }}>
         <TableContainer >
-          <Table sx={{ maxWidth: "100%", minWidth: 350 }}>
+          <Table sx={{ maxWidth: "100%", minWidth: 350 }} stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>
@@ -103,11 +97,10 @@ function Row(props) {
               <Typography variant="h6" gutterBottom component="div">
                 Отзывы
               </Typography>
-              <Table size="small" sx={{ maxWidth: "100%", border: 1 }} >
-                <TableBody>
-
-                  {row.message
-                    ? row.message.map((item) => (<>
+              {row.message
+                ? row.message.map((item) => (<>
+                  <Table size="small" sx={{ maxWidth: "100%", marginBottom: 1, border: 1 }} >
+                    <TableBody>
                       <TableRow key={item.id} >
                         <TableCell>{item.date}</TableCell>
                         <TableCell>{item.realtorFIO}</TableCell>
@@ -118,12 +111,13 @@ function Row(props) {
                       <TableRow>
                         <TableCell colSpan="2">{item.message}</TableCell>
                       </TableRow>
-                    </>
-                    ))
-                    : <TableRow><Typography variant="h8" gutterBottom component="div">Еще не оставили ни одного комментария</Typography></TableRow>
-                  }
-                </TableBody>
-              </Table>
+                    </TableBody>
+                  </Table>
+                </>
+                ))
+                : <TableRow><Typography variant="h8" gutterBottom component="div">Еще не оставили ни одного комментария</Typography></TableRow>
+              }
+
             </Box>
           </Collapse>
         </TableCell>
