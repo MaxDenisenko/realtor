@@ -1,6 +1,6 @@
 import axios from "axios";
 import AuthService from "../../service/auth.service";
-import { AUTH_DATA_USER, AUTH_LOGOUT, LOADING } from "../const";
+import { AUTH_DATA_USER, AUTH_LOGOUT, HAS_ERROR, LOADING } from "../const";
 import { API_URL } from "../../api/index";
 
 
@@ -12,6 +12,8 @@ export const AuthLoginAction = (email, password)=> {
             dispatch({type: AUTH_DATA_USER, payload: response.data})
         } catch (error) {
             console.log(error.response?.data?.message);
+            dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
+            setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }
     })
 }
@@ -23,6 +25,8 @@ export const AuthRegistrationAction = (email, password, name, lastname)=> {
             dispatch({type: AUTH_DATA_USER, payload: response.data})
         } catch (error) {
             console.log(error.response?.data?.message);
+            dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
+            setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }
     })
 }
@@ -34,6 +38,8 @@ export const AuthLogoutAction = () => {
             dispatch({type: AUTH_LOGOUT})
         } catch (error) {
             console.log(error.response?.data?.message);
+            dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
+            setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }
     })
 }
@@ -46,6 +52,8 @@ export const AuthCheckAction = () => {
             dispatch({type: AUTH_DATA_USER, payload: response.data})
         } catch (error) {
             console.log(error.response?.data?.message);
+            dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
+            setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }
         finally { dispatch({type: LOADING})}
     }

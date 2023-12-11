@@ -1,8 +1,9 @@
-import { AUTH_DATA_USER, AUTH_LOGOUT, LOADING } from "../const"
+import { AUTH_DATA_USER, AUTH_LOGOUT, HAS_ERROR, LOADING } from "../const"
 
 const initialState = {
     isLogin: false,
-    isLoading: false
+    isLoading: false,
+    hasError: false
 }
 
 const authReducers = (state = initialState, action) => {
@@ -13,6 +14,8 @@ const authReducers = (state = initialState, action) => {
             return initialState
         case LOADING:
             return {...state, isLoading: !state.isLoading}
+        case HAS_ERROR:
+            return {...state, hasError: !state.hasError, error:action.payload}
         default:
             return state
     }

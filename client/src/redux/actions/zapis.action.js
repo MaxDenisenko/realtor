@@ -1,5 +1,5 @@
 import ZapisService from "../../service/zapis.service";
-import { DATA_ZAPIS } from "../const";
+import { DATA_ZAPIS, HAS_ERROR } from "../const";
 
 
 export const GetZapis = ()=> {
@@ -9,6 +9,8 @@ export const GetZapis = ()=> {
             dispatch({type: DATA_ZAPIS, payload: response.data})
         } catch (error) {
             console.log(error.response?.data?.message);
+            dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
+            setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }
     }
 }
@@ -19,6 +21,8 @@ export const CreateZapis = (phone) => {
             await ZapisService.createZapis(phone)
         } catch (error) {
             console.log(error.response?.data?.message);
+            dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
+            setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }
         finally{
             dispatch(GetZapis())

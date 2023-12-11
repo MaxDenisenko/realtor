@@ -12,8 +12,9 @@ import NightShelterOutlinedIcon from '@mui/icons-material/NightShelterOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AuthLoginAction } from '../redux/actions/auth.action';
+import ErrorMsg from '../ext/error';
 
 function Copyright(props) {
   return (
@@ -34,6 +35,7 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
   const dispatch = useDispatch()
+  const hasError = useSelector(state => state.auth.hasError)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -46,6 +48,7 @@ export default function SignIn() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
+      {hasError && <ErrorMsg/>}
         <CssBaseline />
         <Box
           sx={{
