@@ -6,7 +6,7 @@ class CommentsService {
     async getComments(phone) {
         const commentsData = await commentsModule.findAll({where: {phone}})
         if (commentsData.length===0) {
-            throw ApiError.BadRequest('Еще ни кто не оставил комментарии')
+            throw ApiError.BadRequest('Empty')
         }
         return commentsData
     }
