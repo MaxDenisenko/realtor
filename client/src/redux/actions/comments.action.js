@@ -23,7 +23,6 @@ export const CreateComment = (date, phone, realtorFIO, plusminus, message) => {
         }
         finally{
             dispatch(GetComments(phone))
-            dispatch(GetComments())
         }
     }
 }
