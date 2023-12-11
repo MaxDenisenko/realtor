@@ -38,8 +38,6 @@ export const AuthLogoutAction = () => {
             dispatch({type: AUTH_LOGOUT})
         } catch (error) {
             console.log(error.response?.data?.message);
-            dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
-            setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }
     })
 }
@@ -54,6 +52,7 @@ export const AuthCheckAction = () => {
             console.log(error.response?.data?.message);
             dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
             setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
+
         }
         finally { dispatch({type: LOADING})}
     }
