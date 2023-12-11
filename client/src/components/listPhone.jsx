@@ -14,6 +14,8 @@ import AddCommentIcon from '@mui/icons-material/AddComment';
 import AddCommentForm from "./addCommentForm";
 import { GetComments } from "../redux/actions/comments.action";
 import MainAppBar from "./AppBar";
+import { HAS_ERROR } from "../redux/const";
+import ErrorMsg from "../ext/error";
 
 
 const ListPhone = () => {
@@ -29,6 +31,7 @@ const ListPhone = () => {
     <Box sx={{ margin: "10px auto", width: "100%", maxWidth: 650 }}>
     <MainAppBar />
       <Box sx={{ height: "100%" }}>
+      {HAS_ERROR && <ErrorMsg />}
         <TableContainer >
           <Table sx={{ maxWidth: "100%", minWidth: 350 }}>
             <TableHead>
