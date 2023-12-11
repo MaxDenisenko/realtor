@@ -1,6 +1,7 @@
 
 import CommentsService from "../../service/comments.service";
 import { DATA_COMMENTS, HAS_ERROR } from "../const";
+import { GetZapis } from "./zapis.action";
 
 
 
@@ -29,6 +30,7 @@ export const CreateComment = (date, phone, realtorFIO, plusminus, message) => {
         }
         finally{
             dispatch(GetComments(phone))
+            dispatch(GetZapis())
         }
     }
 }
