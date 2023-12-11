@@ -8,7 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import NightShelterOutlinedIcon from '@mui/icons-material/NightShelterOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -55,11 +55,14 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, bgcolor: 'black' }}>
+            <NightShelterOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            Вход
+          <Typography component="h3" variant="h3">
+            Realtor App
+          </Typography>
+          <Typography component="h5" variant="h5">
+            (Черный список арендаторов)
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -97,7 +100,7 @@ export default function SignIn() {
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                    Забыли пароль?
+                  Забыли пароль?
                 </Link>
               </Grid>
               <Grid item>
