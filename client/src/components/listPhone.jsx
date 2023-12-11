@@ -28,15 +28,11 @@ const ListPhone = () => {
   return <>
     <Box sx={{ margin: "10px auto", width: "100%", maxWidth: 650 }}>
     <MainAppBar />
-      {/* <Box sx={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
-        
-      </Box> */}
       <Box sx={{ height: "100%" }}>
         <TableContainer >
-          <Table sx={{ maxWidth: "100%", minWidth: 350 }} stickyHeader>
+          <Table sx={{ maxWidth: "100%", minWidth: 350 }}>
             <TableHead>
               <TableRow>
-                <TableCell>ID</TableCell>
                 <TableCell></TableCell>
                 <TableCell>Телефон</TableCell>
                 <TableCell>+</TableCell>
@@ -71,10 +67,17 @@ function Row(props) {
     dispatch(GetComments(phone))
   }
 
+  const changeColor = (plusminus) => {
+    let color = '#ff9e81'
+    if (plusminus === 'Положительный') {
+      color = '#9CEE90'
+    } 
+    return color
+  }
+
   return (
     <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell>{row.id}</TableCell>
         <TableCell style={{ padding: 0 }}>
           <IconButton
             size="small"
@@ -93,13 +96,13 @@ function Row(props) {
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
           <Collapse in={open} timeout='auto' unmountOnExit>
-            <Box sx={{ margin: 0 }}>
+            <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
                 Отзывы
               </Typography>
               {row.message
                 ? row.message.map((item) => (<>
-                  <Table size="small" sx={{ maxWidth: "100%", marginBottom: 1, border: 1 }} >
+                  <Table size="small" sx={{borderBottom:'unset',borderRadius: 3, maxWidth: "100%", marginBottom: 1, backgroundColor: (changeColor(item.plusminus))}} >
                     <TableBody>
                       <TableRow key={item.id} >
                         <TableCell>{item.date}</TableCell>
