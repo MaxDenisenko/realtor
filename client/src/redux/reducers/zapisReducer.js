@@ -1,4 +1,4 @@
-import { DATA_ZAPIS, AUTH_LOGOUT, DATA_COMMENTS } from "../const"
+import { DATA_ZAPIS, AUTH_LOGOUT, DATA_COMMENTS, SEARCH_PHONE } from "../const"
 const initialState = []
 
 const zapisReducers = (state=initialState, action) => {
@@ -14,6 +14,10 @@ const zapisReducers = (state=initialState, action) => {
                 }
                 return zapis
             })}
+        case SEARCH_PHONE:
+            return {...state,
+            searchPhone:[...state.zapis].filter(item => item.phone.includes(action.payload))
+            }
         default:
             return state
     }

@@ -1,5 +1,6 @@
 import ZapisService from "../../service/zapis.service";
-import { DATA_ZAPIS, HAS_ERROR } from "../const";
+import { DATA_ZAPIS, HAS_ERROR, SEARCH_PHONE } from "../const";
+
 
 
 export const GetZapis = ()=> {
@@ -18,7 +19,8 @@ export const GetZapis = ()=> {
 export const CreateZapis = (phone) => {
     return async dispatch => {
         try {
-            await ZapisService.createZapis(phone)
+            const response = await ZapisService.createZapis(phone)
+            return response
         } catch (error) {
             console.log(error.response?.data?.message);
             dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
@@ -29,3 +31,5 @@ export const CreateZapis = (phone) => {
         }
     }
 }
+
+export const SearchZapis = (search) => ({type: SEARCH_PHONE, payload:search})

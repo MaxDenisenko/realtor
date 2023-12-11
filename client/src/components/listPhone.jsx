@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetZapis } from "../redux/actions/zapis.action";
-import { Box, Collapse, IconButton, Typography } from "@mui/material";
+import { GetZapis, SearchZapis } from "../redux/actions/zapis.action";
+import { Box, Collapse, IconButton, TextField, Typography } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -19,19 +19,29 @@ import ErrorMsg from "../ext/error";
 
 const ListPhone = () => {
   const dispatch = useDispatch()
-  const zapis = useSelector(state => state.zapis.zapis)
+  let zapis = useSelector(state => state.zapis.zapis)
+  const searchZapis = useSelector(state => state.zapis.searchPhone)
   const hasError = useSelector(state => state.auth.hasError)
+  const [searchedValue, setSearchedValue] = useState('')
+
   useEffect(() => {
     dispatch(GetZapis())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
-
+  const handleSearch = (value) => {
+    setSearchedValue(value)
+    dispatch(SearchZapis(value))
+  }
+  if (searchZapis && searchZapis.length > 0) {
+    zapis=searchZapis
+  }
   return <>
     <Box sx={{ margin: "10px auto", width: "100%", maxWidth: 650 }}>
     <MainAppBar />
       <Box sx={{ height: "100%" }}>
       {hasError && <ErrorMsg/>}
+      <TextField id="filled-basic" variant="filled"  placeholder="Поиск" style={{width: "100%"}} type="number" onChange={e=>handleSearch(e.target.value)} value={searchedValue}/>
         <TableContainer >
           <Table sx={{ maxWidth: "100%", minWidth: 350 }}>
             <TableHead>
