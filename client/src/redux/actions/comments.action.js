@@ -11,13 +11,10 @@ export const GetComments = (phone)=> {
             const response = await CommentsService.getComments(phone)
             dispatch({type: DATA_COMMENTS, payload: response.data})
         } catch (error) {
-            // console.log(error);
-            if (typeof error === "undefined") {
-            return null
-        } else{
+            console.log(error.response?.data?.message);
             dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
             setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)}
-        }
+
     }
 }
 
