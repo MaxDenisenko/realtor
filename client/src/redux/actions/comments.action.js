@@ -9,7 +9,7 @@ export const GetComments = (phone)=> {
     return async (dispatch) => {
         try {
             const response = await CommentsService.getComments(phone)
-            if (!response.data) { return }
+            if (response.data.message) { return }
             dispatch({type: DATA_COMMENTS, payload: response.data})
         } catch (error) {
             // console.log(error.response?.data?.message);
