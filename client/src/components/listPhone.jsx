@@ -28,20 +28,20 @@ const ListPhone = () => {
     dispatch(GetZapis())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  
+
   const handleSearch = (value) => {
     setSearchedValue(value)
     dispatch(SearchZapis(value))
   }
   if (searchZapis && searchZapis.length > 0) {
-    zapis=searchZapis
+    zapis = searchZapis
   }
   return <>
     <Box sx={{ margin: "10px auto", width: "100%", maxWidth: 650 }}>
-    <MainAppBar />
+      <MainAppBar />
       <Box sx={{ height: "100%" }}>
-      {hasError && <ErrorMsg/>}
-      <TextField id="filled-basic" variant="filled"  placeholder="Поиск" style={{width: "100%"}} type="number" onChange={e=>handleSearch(e.target.value)} value={searchedValue}/>
+        {hasError && <ErrorMsg />}
+        <TextField id="filled-basic" variant="filled" placeholder="Поиск" style={{ width: "100%" }} type="number" onChange={e => handleSearch(e.target.value)} value={searchedValue} />
         <TableContainer >
           <Table sx={{ maxWidth: "100%", minWidth: 350 }}>
             <TableHead>
@@ -64,7 +64,7 @@ const ListPhone = () => {
   </>
 }
 
-function Row(props) {
+function Row (props) {
   const { row } = props
   const [open, setOpen] = useState(false)
   const [openModalAddComment, setOpenModalAddComment] = useState(false)
@@ -80,14 +80,6 @@ function Row(props) {
     dispatch(GetComments(phone))
   }
 
-  const changeColor = (plusminus) => {
-    let color = '#ff9e81'
-    if (plusminus === 'Положительный') {
-      color = '#9CEE90'
-    } 
-    return color
-  }
-
   return (
     <>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -99,8 +91,10 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell>{row.phone} <IconButton size="small" onClick={() => setOpenModalAddComment(true)}>
-          <AddCommentIcon /></IconButton>
+        <TableCell>{row.phone}
+          <IconButton size="small" onClick={() => setOpenModalAddComment(true)}>
+            <AddCommentIcon />
+          </IconButton>
           <AddCommentForm modalCommentsOpen={openModalAddComment} setModalCommentsOpen={setOpenModalAddComment} phone={row.phone} realtorFIO={realtorFIO} />
         </TableCell>
         <TableCell>{row.plus}</TableCell>
@@ -113,31 +107,45 @@ function Row(props) {
               <Typography variant="h6" gutterBottom component="div">
                 Отзывы
               </Typography>
-              {row.message
-                ? row.message.map((item) => (<>
-                  <Table size="small" sx={{borderBottom:'unset',borderRadius: 3, maxWidth: "100%", marginBottom: 1, backgroundColor: (changeColor(item.plusminus))}} >
-                    <TableBody>
-                      <TableRow key={item.id} >
-                        <TableCell>{item.date}</TableCell>
-                        <TableCell>{item.realtorFIO}</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell colSpan="2">{item.plusminus}</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell colSpan="2">{item.message}</TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </>
-                ))
-                : <TableRow><Typography variant="h8" gutterBottom component="div">Еще не оставили ни одного комментария</Typography></TableRow>
-              }
-
+              <Table size="small" sx={{ borderBottom: 'unset', borderRadius: 3, maxWidth: "100%", marginBottom: 1 }} >
+                <TableBody>
+                  {row.message
+                    ? row.message.map((item) => <CollapseTable row={item} key={item.id}/>)
+                    : <TableRow><TableCell>Еще не оставили ни одного комментария</TableCell></TableRow>
+                  }
+                </TableBody>
+              </Table>
             </Box>
           </Collapse>
         </TableCell>
       </TableRow>
+    </>
+  )
+}
+
+function CollapseTable(props) {
+
+  const { row } = props
+  const changeColor = (plusminus) => {
+    let color = '#ff9e81'
+    if (plusminus === 'Положительный') {
+      color = '#9CEE90'
+    }
+    return color
+  }
+
+  return (
+    <>
+        <TableRow style={{ backgroundColor: (changeColor(row.plusminus)) }}>
+          <TableCell>{row.date}</TableCell>
+          <TableCell>{row.realtorFIO}</TableCell>
+        </TableRow >
+        <TableRow style={{ backgroundColor: (changeColor(row.plusminus)) }}>
+          <TableCell colSpan="2">{row.plusminus}</TableCell>
+        </TableRow>
+        <TableRow style={{ backgroundColor: (changeColor(row.plusminus)) }}>
+          <TableCell colSpan="2">{row.message}</TableCell>
+        </TableRow>
     </>
   )
 }
