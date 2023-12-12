@@ -6,14 +6,14 @@ class CommentsService {
     async getComments(phone) {
         const commentsData = await commentsModule.findAll({where: {phone}})
         if (commentsData.length===0) {
-            throw ApiError.BadRequest('Empty')
+            throw ApiError.MessageResponse('Нет комментариев')
         }
         return commentsData
     }
     async createComment(date, phone, realtorFIO, plusminus, message ) {
         const findComment = await commentsModule.findOne({where: {phone, realtorFIO}})
         if (findComment) {
-            throw ApiError.BadRequest(`Комментарий на номер (${phone}) Вами уже оставлен`)
+            throw ApiError.MessageResponse(`Комментарий на номер (${phone}) Вами уже оставлен`)
         }
         const createComment = await commentsModule.create({date, phone, realtorFIO, plusminus, message})
 

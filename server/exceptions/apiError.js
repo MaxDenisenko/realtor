@@ -15,4 +15,7 @@ module.exports = class ApiError extends Error {
     static BadRequest(message, errors) {
         return new ApiError(400, message, errors)
     }
+    static MessageResponse (message, error) {
+        return new ApiError(200, message, error)
+    }
 }
