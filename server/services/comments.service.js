@@ -13,7 +13,7 @@ class CommentsService {
     async createComment(date, phone, realtorFIO, plusminus, message ) {
         const findComment = await commentsModule.findOne({where: {phone, realtorFIO}})
         if (findComment) {
-            throw ApiError.MessageResponse(`Комментарий на номер (${phone}) Вами уже оставлен`)
+            throw ApiError.BadRequest(`Комментарий на номер (${phone}) Вами уже оставлен`)
         }
         const createComment = await commentsModule.create({date, phone, realtorFIO, plusminus, message})
 
