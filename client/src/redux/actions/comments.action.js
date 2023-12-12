@@ -9,10 +9,10 @@ export const GetComments = (phone)=> {
     return async (dispatch) => {
         try {
             const response = await CommentsService.getComments(phone)
+            if (!response.data) return
             dispatch({type: DATA_COMMENTS, payload: response.data})
         } catch (error) {
             // console.log(error.response?.data?.message);
-            // if (error.response.data.message === 'Empty') return
             dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
             setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)}
 
