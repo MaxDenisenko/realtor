@@ -25,7 +25,7 @@ export const CreateComment = (date, phone, realtorFIO, plusminus, message) => {
             const response = await CommentsService.createComments(date, phone, realtorFIO, plusminus, message)
             return response
         } catch (error) {
-            console.log(error.response?.data?.message);
+            // console.log(error.response?.data?.message);
             dispatch({type: HAS_ERROR, payload: error.response?.data?.message})
             setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }
