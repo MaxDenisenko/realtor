@@ -73,11 +73,11 @@ function Row (props) {
 
 
   const getCommentsAndOpen = (phone) => {
-    if (open) {
-      setOpen(!open)
+    if (!open) {
+      setOpen(true)
+      dispatch(GetComments(phone))
     }
     setOpen(!open)
-    dispatch(GetComments(phone))
   }
 
   return (

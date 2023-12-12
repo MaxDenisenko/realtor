@@ -30,8 +30,8 @@ export const CreateComment = (date, phone, realtorFIO, plusminus, message) => {
             setTimeout(()=> {dispatch({type: HAS_ERROR})}, 10000)
         }
         finally{
-            dispatch(GetComments(phone))
             dispatch(GetZapis())
+            dispatch(GetComments(phone))
         }
     }
 }
