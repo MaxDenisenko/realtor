@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -12,8 +10,8 @@ import NightShelterOutlinedIcon from '@mui/icons-material/NightShelterOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch, useSelector } from 'react-redux';
-import { AuthLoginAction } from '../redux/actions/auth.action';
+import { useDispatch } from 'react-redux';
+import { AuthRegistrationAction } from '../redux/actions/auth.action';
 import ErrorMsg from '../ext/error';
 import { REGISTRATION } from '../redux/const';
 
@@ -30,30 +28,30 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
-export default function SignIn() {
+export default function Registration() {
   const dispatch = useDispatch()
-  const hasError = useSelector(state => state.auth.hasError)
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     let email = data.get('email').toLowerCase()
     let password = data.get('password')
-    dispatch(AuthLoginAction(email, password))
+    let name = data.get('name')
+    let lastname = data.get('lastname')
+    dispatch(AuthRegistrationAction(email, password, name, lastname))
+    dispatch({type: REGISTRATION})
   };
 
-  const handleRegistration = () => {
+  const handleSignIn = () => {
     dispatch({type: REGISTRATION})
   }
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
-      {hasError && <ErrorMsg/>}
         <CssBaseline />
         <Box
           sx={{
@@ -87,15 +85,37 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
+              name="name"
+              label="Имя пользователя"
+              id="name"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="lastname"
+              label="Фамилия пользователя"
+              id="lastname"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
               name="password"
               label="Пароль"
               type="password"
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Запомнить меня"
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password2"
+              label="Пароль"
+              type="password"
+              id="password2"
+              autoComplete="current-password"
             />
             <Button
               type="submit"
@@ -103,17 +123,14 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Войти
+              Регистрация
             </Button>
             <Grid container>
               <Grid item xs>
-                {/* <Link href="#" variant="body2">
-                  Забыли пароль?
-                </Link> */}
               </Grid>
               <Grid item>
-                <Link variant="body2" onClick={handleRegistration}>
-                  {"Зарегистрироваться"}
+                <Link variant="body2" onClick={handleSignIn}>
+                  {"Войти"}
                 </Link>
               </Grid>
             </Grid>
