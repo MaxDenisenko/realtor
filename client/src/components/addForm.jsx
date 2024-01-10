@@ -37,7 +37,6 @@ const AddForm = ({ modalOpen, setModalOpen }) => {
     >
       <DialogTitle >{"Добавить телефон"}</DialogTitle>
       <DialogContent>
-        <PhoneTextField country="RU" hideSelect value={phone} onPhoneNumber={setPhone}/>
         <TextField sx={{ marginTop: 2 }} size="small" id="outlined-basic" label="Телефон" variant="outlined" value={phone} onChange={(e) => setPhone(e.target.value)} />
       </DialogContent>
       <DialogActions>
